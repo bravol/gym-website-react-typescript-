@@ -5,6 +5,7 @@ import SponsorFortune from "@/assets/SponsorFortune.png";
 import SponsorRedBull from "@/assets/SponsorRedBull.png";
 import useMediaQuery from "@/hooks/useMediaQuery";
 import { SelectedPage } from "@/shared/types";
+import { motion } from "framer-motion";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import ActionButton from "../ActionButton";
 
@@ -20,9 +21,22 @@ const Home = ({ setSelectedPage }: Props) => {
       id={SelectedPage.Home}
     >
       {/* image */}
-      <div className=" md:flex mx-auto w-5/6 items-center justify-center gap-8 md:h-5/6">
+      <motion.div
+        className=" md:flex mx-auto w-5/6 items-center justify-center gap-8 md:h-5/6"
+        onViewportEnter={() => setSelectedPage(SelectedPage.Home)}
+      >
         {/* main header */}
-        <div className=" z-10 mt-32 md:basis-3/5">
+        <motion.div
+          className=" z-10 mt-32 md:basis-3/5"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.5 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0 },
+          }}
+        >
           {/* headings */}
           <div className="md:-mt-20">
             <div className="relative">
@@ -37,9 +51,19 @@ const Home = ({ setSelectedPage }: Props) => {
             Studios to get the Body Shapes That you Dream of.. Get Your Dream
             Body Now.
           </p>
-        </div>
+        </motion.div>
         {/* actions */}
-        <div className=" mt-8 flex items-center gap-10 md:justify-start md:basis-2/5 text-nowrap">
+        <motion.div
+          className=" mt-8 flex items-center gap-10 md:justify-start md:basis-2/5 text-nowrap"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          variants={{
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0 },
+          }}
+        >
           <ActionButton setSelectedPage={setSelectedPage}>
             Join Now
           </ActionButton>
@@ -51,7 +75,7 @@ const Home = ({ setSelectedPage }: Props) => {
           >
             <p>Learn More</p>
           </AnchorLink>
-        </div>
+        </motion.div>
 
         {/* image */}
         <div
@@ -60,7 +84,7 @@ const Home = ({ setSelectedPage }: Props) => {
         >
           <img alt="home-pageGraphic" src={HomePageGraphics} />
         </div>
-      </div>
+      </motion.div>
 
       {/* sponsors */}
       {isAboveMediumScreens && (
